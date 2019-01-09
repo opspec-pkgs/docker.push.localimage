@@ -1,0 +1,3 @@
+name: github.com/opspec-pkgs/docker.push.localimage
+description: push docker image that is stored on host machine
+version: 1.0.0
