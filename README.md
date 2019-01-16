@@ -2,7 +2,7 @@
 
 # Problem statement
 
-push docker image that is stored on host machine
+Builds image that stores on host machines docker image store. * `dockerSocket` must be the correct socket path to the host machine's `dockerd` runtime socket IE `/var/run/docker.sock` (default path). For linux, you can try `netstat -lx | grep docker | grep -Po '/.*docker.sock'` to verify the proper socket file. * `imageName` is the name of the image you want to give the resultant image for `docker build`
 
 # Format
 
@@ -27,6 +27,13 @@ opctl run github.com/opspec-pkgs/docker.push.localimage#1.0.0
 ```yaml
 op:
   ref: github.com/opspec-pkgs/docker.push.localimage#1.0.0
+  inputs:
+    dockerSocket:
+    imageName:
+    password:
+    username:
+    # params w/ default
+    registry:
 ```
 
 # Support
