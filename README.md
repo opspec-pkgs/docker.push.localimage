@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/opspec-pkgs/docker.push.localimage.svg?branch=master)](https://travis-ci.org/opspec-pkgs/docker.push.localimage)
 
+<img src="icon.svg" alt="icon" height="100px">
+
 # Problem statement
 
 Pushes image to docker, or `registry`'s image store. * `dockerSocket` must be the correct socket path to the host machine's `dockerd` runtime socket IE `/var/run/docker.sock` (default path). For linux, you can try `netstat -lx | grep docker | grep -Po '/.*docker.sock'` to verify the proper socket file. * `imageName` is the name of the image you want to give the resultant image for `docker build` * `username` and `password` used to authenticate to registry
