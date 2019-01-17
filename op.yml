@@ -1,3 +1,42 @@
+---
 name: github.com/opspec-pkgs/docker.push.localimage
-description: push docker image that is stored on host machine
+description:
+  Pushes image to docker, or `registry`'s image store.
+  * `dockerSocket` must be the correct socket path to the host machine's `dockerd` runtime socket IE `/var/run/docker.sock` (default path). For linux, you can try `netstat -lx | grep docker | grep -Po '/.*docker.sock'` to verify the proper socket file.
+  * `imageName` is the name of the image you want to give the resultant image for `docker build`
+  * `username` and `password` used to authenticate to registry
+inputs:
+  imageName:
+    string:
+      constraints: { format: docker-image-ref }
+      description: "Name the container image IE container_name:latest (as in what would use for `docker build -t <...>`)"
+  dockerSocket:
+    socket:
+      description: access to docker on node
+  username:
+    string:
+      constraints: { minLength: 1 }
+      description: username for auth w/ registry
+  password:
+    string:
+      constraints: { minLength: 1 }
+      description: password for auth w/ registry
+      isSecret: true
+  registry:
+    string:
+      description: registry to push to
+      default: docker.io
 version: 1.0.0
+run:
+  container:
+    image: { ref: 'docker:18.09.0-dind' }
+    cmd: [ /cmd.sh ]
+    files:
+      /cmd.sh:
+    sockets:
+      /var/run/docker.sock: dockerSocket
+    envVars:
+      imageName:
+      username:
+      password:
+      registry:
